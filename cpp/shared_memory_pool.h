@@ -47,8 +47,12 @@ public:
 		{
 			_fd = open(file_path, O_RDWR | O_CREAT);
 			if (_fd == -1) throw "file open failed";
-			char buf[total_size];
+			char* buf = new char[total_size];
 			write(_fd, buf, total_size);
+			delete[] buf;
+			close(_fd);
+			_fd = open(file_path, O_RDWR);
+			if (_fd == -1) throw "file open failed";
 		}
 		lseek(_fd, 0, SEEK_SET);
 		_data = (char*)mmap(NULL, total_size, PROT_READ | PROT_WRITE, MAP_SHARED, _fd, 0);
