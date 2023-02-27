@@ -13,6 +13,8 @@ if __name__ == "__main__":
       time.sleep(delay)
       ret, frame = cap.read()
       if ret:
-        while memory.try_write(frame.tobytes()) == False: pass
+        buf = frame.tobytes()
+        while memory.try_write(buf) == False: pass
+        print(f"Wrote {len(buf)} bytes.")
       else: 
         break
