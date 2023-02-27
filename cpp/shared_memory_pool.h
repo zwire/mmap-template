@@ -102,7 +102,7 @@ public:
 #endif
 	}
 
-	void flush() const
+	void flush()
 	{
 		memset(_data, 0, _pool_size * 6);
 	}

@@ -6,7 +6,6 @@ int main(void)
     const int buf_capacity = 1920 * 1080 * 3;
     std::vector<unsigned char> buf(buf_capacity);
     SharedMemoryPool memory("../py/shared.pool", buf_capacity, 2);
-    memory.try_write(buf.data(), buf.size());
 
     int buf_size = 0;
     while (true)
