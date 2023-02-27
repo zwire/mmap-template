@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <memory>
-#include <string>
+#include <string.h>
 
 #ifdef __unix__
 #include <unistd.h>

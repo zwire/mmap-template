@@ -1,6 +1,6 @@
-﻿var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\..\\..\\py\\shared.pool");
+﻿var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../py/shared.pool");
 var bufCapacity = 1920 * 1080 * 3;
-using var memory = new SharedMemoryPool(path, bufCapacity, 5);
+using var memory = new SharedMemoryPool(path, bufCapacity, 2);
 
 Console.WriteLine("Press 'Q' key to exit...");
 

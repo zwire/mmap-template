@@ -1,3 +1,4 @@
+import os
 import mmap
 
 class SharedMemoryPool:
@@ -12,7 +13,8 @@ class SharedMemoryPool:
       file = open(self._file_path, "r+b")
     except:
       file = open(self._file_path, "w+b")
-    file.write(b'\0' * self._pool_size * 6)
+    if os.path.getsize(file_path) < total_size:
+      file.write(b'\0' * total_size)
     self._mm = mmap.mmap(file.fileno(), total_size)
     file.close()
   
