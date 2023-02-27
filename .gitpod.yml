@@ -1,17 +1,17 @@
 image: gitpod/workspace-python
 tasks:
   - before: | 
-    sudo apt-get update && \
-    sudo apt-get install -y wget git && \
-    sudo wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
-    sudo dpkg -i packages-microsoft-prod.deb && \
-    sudo rm packages-microsoft-prod.deb && \
-    sudo apt-get update && \
-    sudo apt-get install -y dotnet-sdk-6.0 && \
-    pip install opencv-python && \
-    cd /workspace/mmap-template/cs && dotnet build && \
-    cd /workspace/mmap-template/cpp && g++ -o main main.cpp && \
-    cd /workspace/mmap-template
+      sudo apt-get update && \
+      sudo apt-get install -y wget git && \
+      sudo wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
+      sudo dpkg -i packages-microsoft-prod.deb && \
+      sudo rm packages-microsoft-prod.deb && \
+      sudo apt-get update && \
+      sudo apt-get install -y dotnet-sdk-6.0 && \
+      pip install opencv-python && \
+      cd /workspace/mmap-template/cs && dotnet build && \
+      cd /workspace/mmap-template/cpp && g++ -o main main.cpp && \
+      cd /workspace/mmap-template
 vscode:
   extensions:
     - ms-python.python
