@@ -1,6 +1,19 @@
 # mmap-template
 
-[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/husty530/mmap-template)
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/husty530/mmap-template)  
+#### How to Run in Gitpod Terminal
+* Python
+```
+cd /workspace/mmap-template/py && python main.py
+```
+* C++ 
+```
+cd /workspace/mmap-template/cpp && ./main
+```
+* C#
+```
+cd /workspace/mmap-template/cs/bin/Debug/net6.0 && ./cs
+```
 
 #### mmapとは
 * mmapはディスク上にあるファイルを仮想メモリにマッピングして読み書きする技術です。  
