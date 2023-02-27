@@ -1,10 +1,7 @@
-﻿using OpenCvSharp;
-
-var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../py/shared.pool");
+﻿var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "../../../../py/shared.pool");
 var bufCapacity = 1920 * 1080 * 3;
 using var memory = new SharedMemoryPool(path, bufCapacity, 2);
-using var mat = new Mat(1080, 1920, MatType.CV_8UC3);
-using var frame = new Mat(540, 960, MatType.CV_8UC3);
+memory.Flush();
 
 Console.WriteLine("Press 'Q' key to exit...");
 
@@ -13,10 +10,8 @@ while (!(Console.KeyAvailable && Console.ReadKey().Key is ConsoleKey.Q))
     if (memory.TryRead(out var buf))
     {
         Console.WriteLine($"Received: {buf.Length} bytes.");
-        unsafe { buf.CopyTo(new Span<byte>(mat.DataPointer, buf.Length)); }
-        Cv2.Resize(mat, frame, frame.Size());
-        Cv2.ImShow("FRAME", frame);
-        Cv2.WaitKey(1);
+        // OpenCvSharpのMatにコピーするなら以下のようにします。
+        // unsafe { buf.CopyTo(new Span<byte>(mat.DataPointer, buf.Length)); }
     }
     else Thread.Sleep(10);
 }

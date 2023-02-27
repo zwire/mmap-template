@@ -7,6 +7,7 @@
 
 #ifdef __unix__
 #include <unistd.h>
+#include <sys/stat.h>
 #include <sys/mman.h>
 #include <fcntl.h>
 #define sleep_msec(n) usleep(n * 1e+3)
@@ -39,11 +40,17 @@ public:
 		_buf_capacity = buf_capacity;
 		_pool_size = pool_size;
 #ifdef __unix__
-		_fd = open(file_path, O_RDWR);
-		if (_fd == -1) throw "file open failed";
 		int page_size = sysconf(_SC_PAGE_SIZE);
-		lseek(_fd, 0, SEEK_SET);
 		int total_size = (_pool_size * (_buf_capacity + 6) / page_size + 1) * page_size;
+		_fd = open(file_path, O_RDWR);
+		if (_fd == -1) 
+		{
+			_fd = open(file_path, O_RDWR | O_CREAT);
+			if (_fd == -1) throw "file open failed";
+			char buf[total_size];
+			write(_fd, buf, total_size);
+		}
+		lseek(_fd, 0, SEEK_SET);
 		_data = (char*)mmap(NULL, total_size, PROT_READ | PROT_WRITE, MAP_SHARED, _fd, 0);
 		if (_data == MAP_FAILED) throw "file mapping failed";
 #else
