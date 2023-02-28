@@ -10,7 +10,7 @@ while (!(Console.KeyAvailable && Console.ReadKey().Key is ConsoleKey.Q))
     if (memory.TryRead(out var buf))
     {
         Console.WriteLine($"Received: {buf.Length} bytes.");
-        // OpenCvSharpのMatにコピーするなら以下のようにします。
+        // If you want to copy to OpenCvSharp's Mat, do the following.
         // unsafe { buf.CopyTo(new Span<byte>(mat.DataPointer, buf.Length)); }
     }
     else Thread.Sleep(10);
